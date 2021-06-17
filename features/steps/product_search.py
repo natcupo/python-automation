@@ -3,35 +3,33 @@ from behave import given, when, then
 from time import sleep
 
 
-SEARCH_INPUT = (By.NAME, 'q')
-SEARCH_SUBMIT = (By.NAME, 'btnK')
+# SEARCH_INPUT = (By.NAME, 'q')
+# SEARCH_SUBMIT = (By.NAME, 'btnK')
 RESULTS_FOUND_MESSAGE = (By.XPATH, "//div[contains(@class,'commercial-unit-desktop-top')]")
 RESULTS = (By.XPATH, "//div[@class='g']")
 
 
 @given('Open Google page')
 def open_google(context):
-    context.driver.get('https://www.google.com/')
+    context.driver.get('http://www.google.com/')
+    # context.application.main_page.open_page()
 
 
 @when('Input {search_word} into search field')
 def input_search(context, search_word):
-    search = context.driver.find_element(*SEARCH_INPUT)
-    search.clear()
-    search.send_keys(search_word)
-    sleep(4)
+    # search = context.driver.find_element(*SEARCH_INPUT)
+    # search.clear()
+    # search.send_keys(search_word)
+    # sleep(4)
+    # context.driver.find_element(*SEARCH_SUBMIT).click()
+    context.application.main_page.search_for_keyword(search_word)
 
 
-@when('Click on search icon')
-def click_search_icon(context):
-    context.driver.find_element(*SEARCH_SUBMIT).click()
-    sleep(1)
-
-
-@then('Product results for {search_word} are shown')
+@when('Product results for {search_word} are shown')
 def verify_found_results_text(context, search_word):
-    results_msg = context.driver.find_element(*RESULTS_FOUND_MESSAGE).text
-    assert search_word in results_msg, "Expected word '{}' in message, but got '{}'".format(search_word, results_msg)
+    # results_msg = context.driver.find_element(*RESULTS_FOUND_MESSAGE).text
+    # assert search_word in results_msg, "Expected word '{}' in message, but got '{}'".format(search_word, results_msg)
+    context.application.search_results_page.verify_result_shown(search_word)
 
 
 @then('First result contains {search_word}')

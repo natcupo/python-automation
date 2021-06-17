@@ -4,14 +4,14 @@ from time import sleep
 
 SEARCH_INPUT = (By. ID, 'twotabsearchtextbox')
 CLICK_SEARCH_ICON = (By.ID, 'nav-search-submit-button')
-SELECT_PRODUCT = (By. CSS_SELECTOR, "a[href*='Celebrity-Pink-Jeans-Infinite-Outsiders']")
+SELECT_PRODUCT = (By. CSS_SELECTOR, "a[href*='Wrangler-Authentics-Classic-5-Pocket-Twilight']")
 TITLE = (By. ID, 'titleSection')
-COLOR_OPTIONS = (By. CSS_SELECTOR, 'div#variation_color_name')
-SELECTED_COLORS = (By.CSS_SELECTOR, 'div#variation_color_name span.selection')
+COLOR_OPTIONS = (By. CSS_SELECTOR, 'ul.a-declarative')
+SELECTED_COLORS = (By.ID, 'color_name_0')
 
 
 @given('Open Amazon page')
-def open_google(context):
+def open_amazon(context):
     context.driver.get('https://www.amazon.com/')
 
 
@@ -38,9 +38,8 @@ def select_product(context):
 def loop_colors(context):
     expected_colors = ['Black Rinse', 'Blue Lagoon Wash', 'Kings of Leon Md', 'OutsidersWash', 'Vintage Dark']
     color_web_elements = context.driver.find_element(*COLOR_OPTIONS)
-
-    for color in color_web_elements:
-        color.click()
+    for i in color_web_elements:
+        i.click()
         actual_color = context.driver.find_element(*SELECTED_COLORS).text
         print('The actual color is: ', actual_color, '.')
-        assert actual_color == expected_colors[color_web_elements.index(color)]
+        assert actual_color == expected_colors[color_web_elements.index(i)]
