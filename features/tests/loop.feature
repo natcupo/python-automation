@@ -7,4 +7,4 @@ Feature: Code for how to loop
     When Enter Jeans into search field
     And Click on search button
     And Select product
-    Then Verify colors are available
+    Then Verify sizes are available

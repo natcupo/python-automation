@@ -12,3 +12,4 @@ class Application:
         self.search_results_page = SearchResults(self.driver)
         self.menu_page = MenuPage(self.driver)
         self.raymour_page = ErrorVerificationPage(self.driver)
+
